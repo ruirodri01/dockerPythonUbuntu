@@ -10,6 +10,6 @@ More detail of the example:
 * The operational system is updated on the image generation process.
 * The port 88 is exposed on the generated image so we can access Nginx on the same port.
 * One example command to build the image is "docker build -t image_name .". This command must be issued on the root folder of the project, and don't forget the point at the end of it.
-* One example command to run the image is "docker run -d --name=container_name image_name"
+* One example command to run the image is "docker run -d -p 88:88 --name=container_name image_name"
 
 
