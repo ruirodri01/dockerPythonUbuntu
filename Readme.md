@@ -6,7 +6,7 @@ More detail of the example:
 
 * Running an example python3 script that enables an API (using FastAPI) on port 8000 (look at the files on "src/")
 * Running Nginx on port 88, with the endpoint "/api/" redirected for port 8000. See file "setup/nginx_setup/default".
-* The python libraries are installed system-wide with pip because in this case we are expecting to run Python scripts with the same dependencies. If this is not your case, consider using virtual environments for each of them. This is enabled with the "--break-system-packages" parameter on the "pip install" command on the dockerfile.
+* The python libraries are installed system-wide with pip because in this case we are expecting to run Python scripts with the same dependencies. This is enabled with the "--break-system-packages" parameter on the "pip install" command in the dockerfile. If this is not your case, consider using virtual environments for each of them. 
 * The operational system is updated on the image generation process.
 * The port 88 is exposed on the generated image so we can access Nginx on the same port.
 * One example command to build the image is "docker build -t image_name .". This command must be issued on the root folder of the project, and don't forget the point at the end of it.
