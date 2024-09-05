@@ -1,15 +1,26 @@
-# **Dockerfile example - Python3 on Ubuntu 24.04 LTS**
+# **Dockerfile Example for an image with Python APIs running on Ubuntu 24.04 LTS**
 
-This was a dockerfile that I've created as a base for running Python APIs on a Ubuntu LTS image. This APIs have one Nginx acting as reverse proxy on front of it; in this way, we can run several APIs in different ports and redirect the requisitions to them using Nginx.
+This Dockerfile serves as a base for running Python APIs using FastAPI on an Ubuntu 24.04 LTS image. Nginx is configured as a reverse proxy, enabling multiple APIs to run on different ports while routing requests accordingly.
 
-More detail of the example:
+Features:
 
-* Running an example python3 script that enables an API (using FastAPI) on port 8000 (look at the files on "src/")
-* Running Nginx on port 88, with the endpoint "/api/" redirected for port 8000. See file "setup/nginx_setup/default".
-* The python libraries are installed system-wide with pip because in this case we are expecting to run Python scripts with the same dependencies. This is enabled with the "--break-system-packages" parameter on the "pip install" command in the dockerfile. If this is not your case, consider using virtual environments for each of your scripts. 
-* The operational system is updated in the image generation process.
-* The port 88 is exposed on the generated image so we can access Nginx on the same port.
-* One example command to build the image is "docker build -t image_name .". This command must be issued on the root folder of the project, and don't forget the point at the end of it.
-* One example command to run the image is "docker run -d -p 88:88 --name=container_name image_name"
+* API Implementation:
+The project includes an example of Python script that runs an API using FastAPI, listening on port 8000. You can find this in the src/ directory.
+* Nginx Configuration:
+Nginx is set up to run on port 88, with the endpoint /api/ forwarding requests to port 8000. Nginx configuration can be found in setup/nginx_setup/default.
 
+* Build the Docker Image
+Use the following command to build the Docker image from the root directory of the project (don't forget the final "."!):
+docker build -t <image_name> .
 
+* Run the Docker Container
+To run the container and map the Nginx port:
+docker run -d -p 88:88 --name=<container_name> <image_name>
+
+Python libraries are installed system-wide via pip to ensure all scripts share the same dependencies. This is achieved using the --break-system-packages option in the Dockerfile, allowing system-wide installs even in environments like Ubuntu 24.04. If your project requires isolated environments, consider using virtual environments.
+
+* Once the container is running, you can test the API by accessing the following URL:
+http://localhost:88/api/
+This will forward the request to FastAPI, which is listening on port 8000.
+
+You can extend this Dockerfile by adding more API endpoints or adjusting the Nginx configuration. Feel free to customize the FastAPI script in the src/ folder to suit your project needs.
